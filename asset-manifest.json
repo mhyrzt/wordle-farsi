@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/wordle-farsi/static/css/main.3e4ecfc1.css",
+    "main.css": "/wordle-farsi/static/css/main.ad14b2ae.css",
     "main.js": "/wordle-farsi/static/js/main.70d605b0.js",
     "index.html": "/wordle-farsi/index.html",
-    "main.3e4ecfc1.css.map": "/wordle-farsi/static/css/main.3e4ecfc1.css.map",
+    "main.ad14b2ae.css.map": "/wordle-farsi/static/css/main.ad14b2ae.css.map",
     "main.70d605b0.js.map": "/wordle-farsi/static/js/main.70d605b0.js.map"
   },
   "entrypoints": [
-    "static/css/main.3e4ecfc1.css",
+    "static/css/main.ad14b2ae.css",
     "static/js/main.70d605b0.js"
   ]
 }
