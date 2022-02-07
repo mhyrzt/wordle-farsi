@@ -1,0 +1,33 @@
+.game-status {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 0 -1em;
+	align-items: center;
+	height: 103px;
+}
+
+.game-status > * {
+	margin: 5px 1em;
+}
+
+.reset {
+	font-size: larger;
+	background-color: white;
+	border: none;
+}
+
+.error {
+	background-color: red;
+	color: white;
+}
+
+h3 {
+	padding-left: 15px;
+	padding-right: 15px;
+	border-radius: 5px;
+}
+
+h3:empty {
+	padding: 0px;
+}

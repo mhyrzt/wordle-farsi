@@ -1,58 +1,106 @@
 import React from "react";
 import Container from "./Components/Container";
-import { getRandomWord } from "./Utils";
+import GameStatus from "./Components/GameStatus";
+import Keyboard from "react-simple-keyboard";
+import { getRandomWord, getFaKey, KEYBOARD_LAYOUT } from "./Utils";
+import "react-simple-keyboard/build/css/index.css";
+import "./App.css";
+
 const EMPTY = " ".repeat(5);
+const EMPTY_ARR = [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY];
 
 function App() {
-	const [words, setWords] = React.useState<Array<string>>([
-		EMPTY,
-		EMPTY,
-		EMPTY,
-		EMPTY,
-		EMPTY,
-	]);
-	const [fa, setFa] = React.useState<boolean>(false);
-	const [current, setCurrent] = React.useState<number>(2);
-	const correct = getRandomWord();
-	console.log(correct);
+	const [words, setWords] = React.useState<Array<string>>(EMPTY_ARR);
+	const [word, setWord] = React.useState<string>("");
+	const [error, setError] = React.useState<string>("");
+	const [current, setCurrent] = React.useState<number>(0);
+	const [correct, setCorrect] = React.useState<string>(getRandomWord());
+	const [gameover, setGameover] = React.useState<boolean>(false);
 
-	function keydown({ key }: KeyboardEvent) {
-		let word = words[current].trim();
-		if (word.length === 5) {
-			return;
-		}
-		if (64 < key.charCodeAt(0) && key.charCodeAt(0) < 123) {
-			return;
-		}
-		if (47 < key.charCodeAt(0) && key.charCodeAt(0) < 58) {
-			return;
-		}
-		if (key === "Backspace") {
-			word = word.slice(0, -1);
-		} else {
-			word = word + key;
-		}
-		console.log(word);
-		words[current] = word;
-		setWords(words);
+	function updateWords(): void {
+		setWords((prev) => {
+			const new_words = [...prev];
+			new_words[current] = word + " ".repeat(5 - word.length);
+			return new_words;
+		});
 	}
 
+	function handleEnterChar(chr: string) {
+		if (gameover) {
+			return;
+		}
+
+		if (!chr) {
+			setError("فارسی بنویس :(");
+		}
+		if (word.length === 5) {
+			if (chr === "Enter") {
+				if (word === correct) {
+					setGameover(true);
+				}
+				setCurrent((c) => (c < words.length ? c + 1 : c));
+				setWord("");
+			}
+			return;
+		}
+		if (chr === "Enter") {
+			return;
+		}
+
+		if (chr === "Backspace") {
+			return setWord((w) => w.slice(0, -1));
+		}
+
+		setWord((w) => w + chr);
+	}
+
+	function handleReset() {
+		setWords(EMPTY_ARR);
+		setWord("");
+		setError("");
+		setCurrent(0);
+		setCorrect(getRandomWord());
+		setGameover(false);
+	}
+
+	const keydown = React.useCallback(
+		(event: KeyboardEvent) => handleEnterChar(getFaKey(event)),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[word, gameover]
+	);
+
 	React.useEffect(() => {
-		document.getElementById("root").addEventListener("keydown", keydown);
+		document.addEventListener("keydown", keydown);
 
 		return () => {
-			document.removeEventListener("keydown", keydown, true);
+			document.removeEventListener("keydown", keydown);
 		};
-	}, []);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [keydown]);
 
 	React.useEffect(() => {
-		console.log(words);
-	}, [words]);
+		updateWords();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [word]);
+
+	React.useEffect(() => {
+		setGameover(current === 6);
+	}, [current]);
 
 	return (
 		<div>
+			<h1>{"کلمعه |‌  وردل فارسی"}</h1>
 			<Container current={current} words={words} correct={correct} />
-			<hr />
+			<GameStatus
+				error={error}
+				gameover={gameover}
+				onClick={handleReset}
+				correct={correct}
+			/>
+			<Keyboard
+				layout={KEYBOARD_LAYOUT}
+			/>
+			
 		</div>
 	);
 }

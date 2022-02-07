@@ -53,17 +53,17 @@ const Word: React.FC<WordProps> = ({ word, correct, typing }) => {
 
 	return (
 		<div className="word">
-			{word.split("").reverse().map((letter, idx) => {
-				// const stats = getStats(letter, idx);
-				// const positions = getPositions(word, letter);
-				// console.log(positions)
-				const stats = getStats(letter, word.length - idx - 1);
-				return (
-					<Letter key={idx} {...stats}>
-						{letter}
-					</Letter>
-				);
-			})}
+			{word
+				.split("")
+				.reverse()
+				.map((letter, idx) => {
+					const stats = getStats(letter, word.length - idx - 1);
+					return (
+						<Letter key={idx} {...stats}>
+							{letter}
+						</Letter>
+					);
+				})}
 		</div>
 	);
 };

@@ -9,12 +9,19 @@ interface ContainerPops {
 }
 
 const Container: React.FC<ContainerPops> = ({ words, correct, current }) => {
-	console.log(words)
-    return (
+	return (
 		<div className="container">
-			{words.map((word, idx) => (
-				<Word word={word} correct={correct} key={idx} typing={current <= idx} />
-			))}
+			{words.map((word, idx) => {
+				if (idx > 5) return;
+				return (
+					<Word
+						word={word}
+						correct={correct}
+						key={idx}
+						typing={current <= idx}
+					/>
+				);
+			})}
 		</div>
 	);
 };
