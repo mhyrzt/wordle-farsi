@@ -39,7 +39,20 @@ const KEYBOARD_LAYOUT = {
 };
 
 const KEYBOARD_DISPLAY = {
-	'{bksp}': "←"
-}
+	"{bksp}": "←",
+	"{enter}": "⏎",
+};
 
-export { getRandomWord, getFaKey, WORDS, KEYBOARD_LAYOUT };
+const KEYBOARD_BUTTON_ATTRS = [
+	{ buttons: "{enter}", value: "Enter" },
+	{ buttons: "{bksp}", value: "Backspace" },
+];
+
+export {
+	getRandomWord,
+	getFaKey,
+	WORDS,
+	KEYBOARD_LAYOUT,
+	KEYBOARD_DISPLAY,
+	KEYBOARD_BUTTON_ATTRS,
+};

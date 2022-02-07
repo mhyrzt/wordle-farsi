@@ -2,7 +2,13 @@ import React from "react";
 import Container from "./Components/Container";
 import GameStatus from "./Components/GameStatus";
 import Keyboard from "react-simple-keyboard";
-import { getRandomWord, getFaKey, KEYBOARD_LAYOUT } from "./Utils";
+import {
+	getRandomWord,
+	getFaKey,
+	KEYBOARD_LAYOUT,
+	KEYBOARD_DISPLAY,
+	KEYBOARD_BUTTON_ATTRS,
+} from "./Utils";
 import "react-simple-keyboard/build/css/index.css";
 import "./App.css";
 
@@ -34,7 +40,7 @@ function App() {
 			setError("فارسی بنویس :(");
 		}
 		if (word.length === 5) {
-			if (chr === "Enter") {
+			if (chr === "Enter" || chr === "{enter}") {
 				if (word === correct) {
 					setGameover(true);
 				}
@@ -43,11 +49,11 @@ function App() {
 			}
 			return;
 		}
-		if (chr === "Enter") {
+		if (chr === "Enter" || chr === "{enter}") {
 			return;
 		}
 
-		if (chr === "Backspace") {
+		if (chr === "Backspace" || chr === "{bksp}") {
 			return setWord((w) => w.slice(0, -1));
 		}
 
@@ -99,8 +105,9 @@ function App() {
 			/>
 			<Keyboard
 				layout={KEYBOARD_LAYOUT}
+				display={KEYBOARD_DISPLAY}
+				onKeyPress={handleEnterChar}
 			/>
-			
 		</div>
 	);
 }
