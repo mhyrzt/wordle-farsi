@@ -1,5 +1,11 @@
 .keyboard-container {
-    width: 95vw;
-    margin-left: auto;
-    margin-right: auto;
+	width: 95vw;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@media (min-width: 1025px) {
+	.keyboard-container {
+		width: 32vw;
+	}
 }
