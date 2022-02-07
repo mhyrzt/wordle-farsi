@@ -1,5 +1,32 @@
+$wrong: #787c7e;
+$correct: #6aaa64;
+$position: #c9b458;
+
 .letter {
-    background-color: black;
-    height: 2.0vmin;
-    width: 2.0vmin;
+	text-align: center;
+	vertical-align: middle;
+	color: black;
+	background-color: white;
+	border: 1px solid black;
+	height: 4rem;
+	width: 4rem;
+	font-size: 3rem;
+}
+
+.correct {
+	color: white;
+	background-color: $correct;
+	border: 1px solid $correct;
+}
+
+.position {
+	color: white;
+	border: 1px solid $position;
+	background-color: $position;
+}
+
+.wrong {
+	color: white;
+	background-color: $wrong;
+	border: 1px solid $wrong;
 }
