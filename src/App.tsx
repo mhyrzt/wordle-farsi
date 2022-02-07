@@ -1,15 +1,8 @@
 import React from "react";
 import Container from "./Components/Container";
 import GameStatus from "./Components/GameStatus";
-import Keyboard from "react-simple-keyboard";
-import {
-	getRandomWord,
-	getFaKey,
-	KEYBOARD_LAYOUT,
-	KEYBOARD_DISPLAY,
-	KEYBOARD_BUTTON_ATTRS,
-} from "./Utils";
-import "react-simple-keyboard/build/css/index.css";
+import CustomKeyboard from "./Components/CustomKeyboard";
+import { getRandomWord, getFaKey } from "./Utils";
 import "./App.css";
 
 const EMPTY = " ".repeat(5);
@@ -103,11 +96,7 @@ function App() {
 				onClick={handleReset}
 				correct={correct}
 			/>
-			<Keyboard
-				layout={KEYBOARD_LAYOUT}
-				display={KEYBOARD_DISPLAY}
-				onKeyPress={handleEnterChar}
-			/>
+			<CustomKeyboard onKeyPress={handleEnterChar} />
 		</div>
 	);
 }
